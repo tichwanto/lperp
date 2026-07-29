@@ -511,7 +511,7 @@
 
       <div class="grid sm:grid-cols-2 gap-5">
         <div>
-          <label for="nama" class="block text-sm font-semibold text-navy mb-1.5">Nama Lengkap</label>
+          <label for="nama" class="block text-sm font-semibold text-navy mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
           <input required id="nama" name="nama" type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Nama Anda">
         </div>
         <div>
@@ -523,11 +523,11 @@
           <input required id="jabatan" name="jabatan" type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Direktur / Manager">
         </div>
         <div>
-          <label for="email" class="block text-sm font-semibold text-navy mb-1.5">Email</label>
+          <label for="email" class="block text-sm font-semibold text-navy mb-1.5">Email <span class="text-red-500">*</span></label>
           <input required id="email" name="email" type="email" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="nama@perusahaan.com">
         </div>
         <div>
-          <label for="whatsapp" class="block text-sm font-semibold text-navy mb-1.5">Nomor WhatsApp</label>
+          <label for="whatsapp" class="block text-sm font-semibold text-navy mb-1.5">Nomor WhatsApp <span class="text-red-500">*</span></label>
           <input required id="whatsapp" name="whatsapp" type="tel" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="08xx xxxx xxxx">
         </div>
         <div>
@@ -543,8 +543,8 @@
       </div>
 
       <div>
-        <p class="block text-sm font-semibold text-navy mb-2.5">Modul yang Anda Butuhkan</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <p class="block text-sm font-semibold text-navy mb-2.5">Modul yang Anda Butuhkan <span class="text-red-500">*</span></p>
+        <div id="modulGroup" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
           <label class="flex items-center gap-2 text-sm text-gray-700 bg-sectionbg rounded-lg px-3 py-2.5 cursor-pointer">
             <input type="checkbox" name="modul" value="Accounting" class="w-4 h-4"> Accounting
           </label>
@@ -564,16 +564,17 @@
             <input type="checkbox" name="modul" value="Project" class="w-4 h-4"> Project
           </label>
         </div>
+        <p id="modulError" class="hidden text-xs text-red-500 mt-2">Pilih minimal satu modul.</p>
       </div>
 
       <div>
-        <label for="kebutuhan" class="block text-sm font-semibold text-navy mb-1.5">Ceritakan kebutuhan bisnis Anda</label>
-        <textarea id="kebutuhan" name="kebutuhan" rows="3" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Misalnya kendala yang sedang dihadapi, target implementasi, atau proses bisnis yang ingin ditingkatkan."></textarea>
+        <label for="kebutuhan" class="block text-sm font-semibold text-navy mb-1.5">Ceritakan kebutuhan bisnis Anda <span class="text-red-500">*</span></label>
+        <textarea required id="kebutuhan" name="kebutuhan" rows="3" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Misalnya kendala yang sedang dihadapi, target implementasi, atau proses bisnis yang ingin ditingkatkan."></textarea>
       </div>
 
       <label class="flex items-start gap-2.5 text-sm text-gray-600">
         <input required type="checkbox" name="persetujuan" class="w-4 h-4 mt-0.5">
-        Saya bersedia dihubungi oleh tim konsultan.
+        Saya bersedia dihubungi oleh tim konsultan. <span class="text-red-500">*</span>
       </label>
 
       <button type="submit" class="w-full py-4 rounded-lg bg-accent text-white font-bold hover:bg-navy transition-colors shadow-soft">
@@ -751,6 +752,16 @@
       form.reportValidity();
       return;
     }
+
+    // Validasi: minimal satu modul harus dipilih
+    const modulChecked = form.querySelectorAll('input[name="modul"]:checked').length > 0;
+    const modulError = document.getElementById('modulError');
+    if (!modulChecked) {
+      modulError.classList.remove('hidden');
+      document.getElementById('modulGroup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    modulError.classList.add('hidden');
 
     const formData = new FormData(form);
     // gabungkan checkbox modul yang dipilih jadi satu baris agar rapi di email
