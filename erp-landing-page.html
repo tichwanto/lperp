@@ -815,6 +815,11 @@
     form.querySelector('input[name="_next"]').value =
       window.location.origin + window.location.pathname + '#' + THANKS_MARK;
 
+    // buang field token reCAPTCHA (g-recaptcha-response) supaya tidak ikut
+    // terkirim & tampil di email — token ini cuma dipakai untuk validasi
+    // di sisi browser, tidak perlu dikirim ke FormSubmit
+    form.querySelectorAll('[name="g-recaptcha-response"]').forEach(el => el.removeAttribute('name'));
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Mengirim...';
 
