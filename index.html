@@ -761,16 +761,26 @@
     modulError.classList.add('hidden');
 
     const formData = new FormData(form);
-    // gabungkan checkbox modul yang dipilih jadi satu baris agar rapi di email
     const modulTerpilih = formData.getAll('modul');
-    formData.delete('modul');
-    formData.set('Modul yang dibutuhkan', modulTerpilih.length ? modulTerpilih.join(', ') : '-');
-
-    // subject email dinamis: "Landing Page - <Nama Lengkap>"
     const namaLead = (formData.get('nama') || '').toString().trim();
-    formData.set('subject', namaLead ? `Landing Page - ${namaLead}` : 'Landing Page - Lead Baru');
+    const emailLead = (formData.get('email') || '').toString().trim();
 
-    const payload = Object.fromEntries(formData.entries());
+    // Payload dengan label yang rapi & mudah dibaca di email (tabel Name/Value)
+    const payload = {
+      access_key: formData.get('access_key'),
+      subject: namaLead ? `Landing Page - ${namaLead}` : 'Landing Page - Lead Baru',
+      from_name: formData.get('from_name'),
+      replyto: emailLead,
+      'Nama Lengkap': namaLead,
+      'Nama Perusahaan': (formData.get('perusahaan') || '').toString().trim(),
+      'Jabatan': (formData.get('jabatan') || '').toString().trim(),
+      'Email': emailLead,
+      'Nomor WhatsApp': (formData.get('whatsapp') || '').toString().trim(),
+      'Jumlah Karyawan': (formData.get('jumlah_karyawan') || '').toString().trim(),
+      'Modul yang Dibutuhkan': modulTerpilih.length ? modulTerpilih.join(', ') : '-',
+      'Kebutuhan Bisnis': (formData.get('kebutuhan') || '').toString().trim() || '-',
+      'Bersedia Dihubungi Tim Konsultan': formData.get('persetujuan') ? 'Ya' : 'Tidak'
+    };
 
     const originalText = submitBtn.textContent;
     submitBtn.disabled = true;
