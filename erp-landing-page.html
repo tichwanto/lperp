@@ -78,6 +78,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
   tailwind.config = {
     theme: {
@@ -574,6 +575,11 @@
         Saya bersedia dihubungi oleh tim konsultan. <span class="text-red-500">*</span>
       </label>
 
+      <div>
+        <div id="recaptchaWidget" class="g-recaptcha" data-sitekey="6Lc_k2wtAAAAADxJHIp7QxiyibQ5dHoB-bqCjNFp"></div>
+        <p id="recaptchaError" class="hidden text-xs text-red-500 mt-2">Mohon centang reCAPTCHA terlebih dahulu.</p>
+      </div>
+
       <button type="submit" class="w-full py-4 rounded-lg bg-accent text-white font-bold hover:bg-navy transition-colors shadow-soft">
         Jadwalkan Demo Gratis
       </button>
@@ -768,6 +774,16 @@
       return;
     }
     modulError.classList.add('hidden');
+
+    // Validasi: reCAPTCHA harus dicentang
+    const recaptchaError = document.getElementById('recaptchaError');
+    const recaptchaResponse = (typeof grecaptcha !== 'undefined') ? grecaptcha.getResponse() : '';
+    if (!recaptchaResponse) {
+      recaptchaError.classList.remove('hidden');
+      document.getElementById('recaptchaWidget').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    recaptchaError.classList.add('hidden');
 
     const namaLead = (form.querySelector('#nama').value || '').trim();
 
