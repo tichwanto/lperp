@@ -502,7 +502,7 @@
     <form id="leadForm" class="fade-up bg-white rounded-2xl shadow-soft p-6 md:p-10 space-y-6"
           action="https://api.web3forms.com/submit" method="POST" novalidate>
       <input type="hidden" name="access_key" value="76768e82-c5d7-4698-811b-016b1d70c83b">
-      <input type="hidden" name="subject" value="Lead Baru - Request Demo ERP Fujicon">
+      <input type="hidden" name="subject" value="Landing Page - Lead Baru">
       <input type="hidden" name="from_name" value="Landing Page ERP Fujicon">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -765,6 +765,10 @@
     const modulTerpilih = formData.getAll('modul');
     formData.delete('modul');
     formData.set('Modul yang dibutuhkan', modulTerpilih.length ? modulTerpilih.join(', ') : '-');
+
+    // subject email dinamis: "Landing Page - <Nama Lengkap>"
+    const namaLead = (formData.get('nama') || '').toString().trim();
+    formData.set('subject', namaLead ? `Landing Page - ${namaLead}` : 'Landing Page - Lead Baru');
 
     const payload = Object.fromEntries(formData.entries());
 
