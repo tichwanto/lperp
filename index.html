@@ -510,11 +510,11 @@
       <div class="grid sm:grid-cols-2 gap-5">
         <div>
           <label for="nama" class="block text-sm font-semibold text-navy mb-1.5">Nama Lengkap <span class="text-red-500">*</span></label>
-          <input required id="nama" name="Nama Lengkap" type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Nama Anda">
+          <input required id="nama" name="Nama Lengkap" type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Nama Anda">
         </div>
         <div>
           <label for="perusahaan" class="block text-sm font-semibold text-navy mb-1.5">Nama Perusahaan</label>
-          <input required id="perusahaan" name="Nama Perusahaan" type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="PT Contoh Sejahtera">
+          <input required id="perusahaan" name="Nama Perusahaan" type="text" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="PT Contoh Sejahtera">
         </div>
         <div>
           <label for="jabatan" class="block text-sm font-semibold text-navy mb-1.5">Jabatan</label>
@@ -526,11 +526,11 @@
         </div>
         <div>
           <label for="whatsapp" class="block text-sm font-semibold text-navy mb-1.5">Nomor WhatsApp <span class="text-red-500">*</span></label>
-          <input required id="whatsapp" name="Nomor WhatsApp" type="tel" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="08xx xxxx xxxx">
+          <input required id="whatsapp" name="Nomor WhatsApp" type="tel" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="08xx xxxx xxxx">
         </div>
         <div>
           <label for="jumlah_karyawan" class="block text-sm font-semibold text-navy mb-1.5">Jumlah Karyawan</label>
-          <select required id="jumlah_karyawan" name="Jumlah Karyawan" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent bg-white">
+          <select required id="jumlah_karyawan" name="Jumlah Karyawan" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent bg-white">
             <option value="" disabled selected>Pilih rentang</option>
             <option value="1-20">1–20</option>
             <option value="21-50">21–50</option>
@@ -567,7 +567,7 @@
 
       <div>
         <label for="kebutuhan" class="block text-sm font-semibold text-navy mb-1.5">Ceritakan kebutuhan bisnis Anda <span class="text-red-500">*</span></label>
-        <textarea required id="kebutuhan" name="Kebutuhan Bisnis" rows="3" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Misalnya kendala yang sedang dihadapi, target implementasi, atau proses bisnis yang ingin ditingkatkan."></textarea>
+        <textarea required id="kebutuhan" name="Kebutuhan Bisnis" rows="3" class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Misalnya kendala yang sedang dihadapi, target implementasi, atau proses bisnis yang ingin ditingkatkan."></textarea>
       </div>
 
       <label class="flex items-start gap-2.5 text-sm text-gray-600">
@@ -794,7 +794,7 @@
     form.querySelectorAll('input[name="modul"]').forEach(el => el.removeAttribute('name'));
     const modulHidden = document.createElement('input');
     modulHidden.type = 'hidden';
-    modulHidden.name = 'Modul yang Dibutuhkan';
+    modulHidden.name = 'Modul yang Dibutuhkan';
     modulHidden.value = modulValue || '-';
     form.appendChild(modulHidden);
 
@@ -804,7 +804,7 @@
     if (persetujuanEl) persetujuanEl.removeAttribute('name');
     const persetujuanHidden = document.createElement('input');
     persetujuanHidden.type = 'hidden';
-    persetujuanHidden.name = 'Bersedia Dihubungi Tim Konsultan';
+    persetujuanHidden.name = 'Bersedia Dihubungi Tim Konsultan';
     persetujuanHidden.value = bersediaDihubungi;
     form.appendChild(persetujuanHidden);
 
